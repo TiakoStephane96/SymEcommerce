@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CheckoutController!{% endblock %}
+
+{% block body %}
+<div style="height: 100px;">
+</div>
+
+    <script>
+        (function(){
+            const stripe = Stripe('pk_test_51LTGKZB7ize0x3eXfZcYjK2CQnPXVVsSxHy1bzdUJ8OKK6vfcrHIyYaaKDNAKWqwZHpFPRENmk83tVNVdporBoyp00sDmO5qrK');
+            stripe.redirectToCheckout({
+                sessionId: "{{ sessionId }}"
+            })
+        })();
+    </script>
+{% endblock %}

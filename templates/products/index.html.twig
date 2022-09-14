@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+
+<div style="height: 100px;">
+</div>
+
+<div class="container d-flex flex-wrap my-3">
+  <form>
+    <button style="text-transform: none; color:white" type="button submit" name="filter" value="all" class="btn btn-info m-3">Get All</button>
+  </form>
+  {% for category in categories %}
+    <form>
+      <button style="text-transform: none;" type="button submit" name="filter" value={{category.id}} class="btn btn-outline-primary m-3">{{category.nameCategorie}}</button>
+    </form>
+  {% endfor %}
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+        <div class="col-sm-6 col-md-4 my-2">
+
+
+<div class="card bg-secondary" style="width: 18rem;">
+     <img class="img-thumbnail " src="{{ vich_uploader_asset(product, 'image')}}" alt={{ product.nameProduct }} style="width:100"/>
+  <div class="card-body">
+    <h5 class="card-title" style="color:white">{{ product.nameProduct }}</h5>
+    <p class="card-text" style="color:white">{{ product.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" >Price : {{ product.price }} Fcfa</li>
+  </ul>
+  <div class="card-body" style="position: relative;left: 20%; ">
+    <a href="{{path('app_cart_add_Products', {'id' : product.id} )}}">
+                  <button style="text-transform: none; color:white " class="btn btn-info rounded ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-plus-fill mb-2" viewBox="0 0 16 16">
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                  </svg>
+ Add to cart </button>
+                 
+                </a>
+  </div>
+</div>
+
+          {#<div class="card text-white bg-dark rounded">
+            <div class="card-header">{{ product.category }}</div>
+            <div class="card-body" style=" justify-content:center">
+                <img class="img-thumbnail " src="{{ vich_uploader_asset(product, 'image')}}" alt={{ product.nameProduct }} style="width:100"/>
+                <h4 class="card-title my-3">{{ product.nameProduct }}</h4>
+                <p class="card-text">Price : {{ product.price }} FCFA</p>
+                <p class="card-text">{{ product.description }}</p>
+                <a href="{{path('app_cart_add_Products', {'id' : product.id} )}}">
+                  <button class="btn btn-success rounded">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart-plus-fill mb-2" viewBox="0 0 16 16">
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                  </svg>
+ Add to cart </button>
+                 
+                </a>
+            </div>
+          </div>#}
+
+
+
+        </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

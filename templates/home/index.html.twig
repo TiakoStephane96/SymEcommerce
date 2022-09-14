@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony | Home{% endblock %}
+
+{% block body %}
+<style>
+.category-container {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: black;
+}
+
+.category-container:hover .overlay {
+  opacity: 0.6;
+}
+
+.text {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+main{
+    margin-top:70px;
+    position: sticky;
+}
+</style>
+
+<main >
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" style="height:500px">
+            <div class="carousel-item active">
+            <img src="https://127.0.0.1:8000/images/bg.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="https://img.freepik.com/free-vector/template-banner-online-store-with-shopping-cart-with-purchases-boxes-delivery-from-supermarket-vector-illustration_548887-104.jpg?w=2000" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="http://euro-sourcing.com/images/slider/banniere%20optique%2002.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <section class="container home">
+        <h1 style="text-align:center" class="mt-5 mb-5"> Your available categories</h1>
+        {% for category in categories %}
+        <div class="card col-sm-6 category-container" style="width: 18rem;">
+            <img class="w-100 py-2 img-thumbnail rounded" src="{{ vich_uploader_asset(category, 'image')}}" alt={{category.nameCategorie}} />
+             <a class="overlay" href="http://127.0.0.1:8000/products?filter={{category.id}}">
+                    <div class="text">{{category.nameCategorie}}</div>
+            </a>
+        <div class="card-body">
+            <p class="card-text " style="font-size:20px; text-align:center"> Categorie : {{category.nameCategorie}} <br/>
+            Date Publication :<br/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clock pb-1" viewBox="0 0 16 16">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+            </svg> 
+            {{category.updatedAt | date("d/m/Y") }}
+            </p>
+        </div>
+        </div>
+        {% endfor %}
+
+        {#<article class="row">
+        {% for category in categories %}
+            <div class="col-sm-6 category-container">                
+                <img class="w-100 py-2" src="{{ vich_uploader_asset(category, 'image')}}" alt={{category.nameCategorie}} />
+                <a class="overlay" href="http://127.0.0.1:8000/products?filter={{category.id}}">
+                    <div class="text">{{category.nameCategorie}}</div>
+                </a>
+            </div>
+        {% endfor %}
+        </article>#}
+    </section>
+   
+</main>
+<style>
+.video-responsive { 
+    overflow:hidden; 
+    padding-bottom:56.25%; 
+    position:relative; 
+    height:0;
+}
+
+
+
+.video-responsive iframe {
+    left:0; 
+    top:0; 
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+</style>
+{% endblock %}

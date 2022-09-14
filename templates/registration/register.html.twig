@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div style="height: 100px;">
+</div>
+
+    <section class="container py-5">
+        <div>
+            {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+
+            <h1 class="mt-5" style="text-align:center ">Register</h1>
+
+            {{ form_start(registrationForm) }}
+            <div style="margin-left:32%">
+            {{ form_row(registrationForm.name) }}
+            {{ form_row(registrationForm.adress) }}
+            {{ form_row(registrationForm.number) }}
+             {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <button style="margin-left:20%" type="submit" class="btn btn-success my-3 rounded mt-4">Register</button>
+            </div>
+               
+            {{ form_end(registrationForm) }}
+        </div>
+    </section>
+{% endblock %}
